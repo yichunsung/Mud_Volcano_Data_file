@@ -1,6 +1,6 @@
 # Mud Volcano from Southwest of Taiwan Data.Frame
 
-setwd('c:/MV')
+setwd('c:/R/Mud_Volcano_Data_file') #Change the wd path for yourself!!!!
 Sys.setlocale(category = "LC_ALL", locale = "")
 mv_data <- read.csv("mv001.csv", header= T, sep=",") #loading Mud Volcano Data 
 
@@ -24,5 +24,9 @@ pd_air <- read.csv("pd2015.csv", header = T, sep=",") #Loading pd station 2015 A
 names(pd_air)
 names(pd_air)[1:3] <- c("day", "site", "no")
 summary(pd_air)
-pd_CH4 <- subset(pd_air, no=="CH4")#使用一下subset()函數!
+pd_CH4 <- subset(pd_air, no=="CH4")#subset��!
 summary(pd_CH4)
+
+# draw
+install.packages("ggplot2")
+library(ggplot2)
