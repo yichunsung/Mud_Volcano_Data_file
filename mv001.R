@@ -1,3 +1,9 @@
+# library packages
+library(magrittr)
+library(httr)
+library(rvest)
+library(stringr)
+
 # Mud Volcano from Southwest of Taiwan Data.Frame
 
 setwd('c:/R/Mud_Volcano_Data_file') #Change the wd path for yourself!!!!
@@ -35,7 +41,7 @@ ggplot(WD_MV_CH4, aes(x=CH4_conc))+geom_histogram(binwidth = 3, fill="red", colo
 
 
 #pd air station data for Methane
-setwd('c:/R/Mud_Volcano_Data_file') #Change the wd path for yourself!!!!
+setwd('c:/Mud_Volcano_Data_file') #Change the wd path for yourself!!!!
 Sys.setlocale(category = "LC_ALL", locale = "")
 pd_air <- read.csv("pd2015.csv", header = T, sep=",") #Loading pd station 2015 Air Data
 names(pd_air)
@@ -51,6 +57,29 @@ day_new <- c(1:360)
 pd_CH4_new2<- cbind(pd_CH4_new1, day_new)
 pd_CH4_new2$asDate <- as.Date(pd_CH4_new2$day, "%Y/%m/%d")
 
+time <- c(1:364)
+x1 <- newFrameofTestMV[,1]
+x2 <- newFrameofTestMV[,2]
+x3 <- newFrameofTestMV[,3]
+temp3 <- as.numeric(as.vector(x3))
+testF <- data.frame(time)
+
+for(i in 1:ncol(newFrameofTestMV)){
+    temp <- newFrameofTestMV[,i]
+    temp2 <- as.numeric(as.vector(temp))
+    testF <- cbind(testF, temp2)
+  
+}
+resultDF <- data.frame(testF)
+
+#for(index in 1:ncol(number)){
+#  col <- number[, index]
+#  colNew <- gsub(',', '', col)# gsub every column
+#  colNum <- as.integer(colNew)# Transform into integer
+#  result[[index]] <- colNum# Insert into list
+#}
+
+
 #=----------------------------------------------------------------------------------------------=
 #=                                          TEST                                                =
 #=                                                                                              =
@@ -58,6 +87,15 @@ pd_CH4_new2$asDate <- as.Date(pd_CH4_new2$day, "%Y/%m/%d")
 
 newFrameofTestMV <- pd_CH4_draw[4:27]
 colnames(newFrameofTestMV) <- c(0:23)
+newFrameCH4 <- data.frame()
+
+
+#=----------------------------------------------------------------------------------------------=
+#=                                          TEST                                                =
+#=                                                                                              =
+#-----------------------------------------------------------------------------------------------=
+
+
 g<-c()
 newFrameCH4 <- data.frame()
 for (i in 1:ncol(newFrameofTestMV)){
