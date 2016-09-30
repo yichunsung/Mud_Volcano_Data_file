@@ -41,7 +41,7 @@ pd_air <- read.csv("pd2015.csv", header = T, sep=",") #Loading pd station 2015 A
 names(pd_air)
 names(pd_air)[1:3] <- c("day", "site", "no")
 summary(pd_air)
-pd_CH4 <- subset(pd_air, no=="CH4")#subset•¸!
+pd_CH4 <- subset(pd_air, no=="CH4")#subset!
 pd_CH4_draw <- subset(pd_CH4, X00!="")
 summary(pd_CH4)
 x00_new <- as.numeric(as.vector(pd_CH4_draw$X00))
@@ -103,6 +103,6 @@ ggplot(pd_CH4_new2, aes(x=asDate, y=x00_new))+geom_line(colour="red")+geom_point
 install.packages("plotly")
 library(plotly)
 
-plotly_pdStatMethane <- plotly
+plotly_pdStatMethane <- plot_ly(pd_CH4_new2, x=pd_CH4_new2$asDate, y=pd_CH4_new2$x00_new, type="scatter", mode="lines", color="lightgreen")
 
 
